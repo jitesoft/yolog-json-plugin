@@ -1,5 +1,6 @@
-import JsonBase from './index';
+import JsonBase from '../index';
 import fs from 'fs';
+import sprintf from '@jitesoft/sprintf';
 
 export default class Json extends JsonBase {
   #colors = {
@@ -21,10 +22,10 @@ export default class Json extends JsonBase {
   async log (tag, timestamp, message) {
     const data = await super.log(tag, timestamp, message);
     if (this.#file !== null) {
-      await this.#writeToFileAsPromise(this.#file, JSON.stringify(data));
+      await this.#writeToFileAsPromise(this.#file, sprintf('%j', data));
     } else {
       await new Promise((resolve, reject) => {
-        process[this.#colors[tag]].write(JSON.stringify(data), 'UTF-8', (err) => err ? reject(err) : resolve());
+        process[this.#colors[tag]].write(sprintf('%j', data), 'UTF-8', (err) => err ? reject(err) : resolve());
       });
     }
   }

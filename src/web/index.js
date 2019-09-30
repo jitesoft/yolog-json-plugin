@@ -1,6 +1,6 @@
-import JsonBase from './index';
+import JsonBase from '../../src/index';
 
-export default class Json extends JsonBase {
+export default class JsonPlugin extends JsonBase {
   #colors = {
     error: { call: 'error' },
     critical: { call: 'error' },
