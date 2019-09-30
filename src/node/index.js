@@ -14,11 +14,23 @@ export default class Json extends JsonBase {
   };
   #file = null;
 
+  /**
+   * Constructor.
+   * @param {String|null} [filePath] File path if any.
+   */
   constructor (filePath = null) {
     super();
     this.#file = filePath;
   }
 
+  /**
+   * Method called when a log message is intercepted and the plugin is listening to the given tag.
+   *
+   * @param {String} tag Tag which was used when logging the message.
+   * @param {Number} timestamp Timestamp (in ms) when the log was intercepted by the Yolog instance.
+   * @param {String} message
+   * @return {Promise<void>}
+   */
   async log (tag, timestamp, message) {
     const data = await super.log(tag, timestamp, message);
     if (this.#file !== null) {
