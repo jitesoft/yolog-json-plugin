@@ -2,7 +2,6 @@
 .gitmodules
 .gitignore
 tests
-plugins
 node_modules
 webpack.config.js
 .eslintrc.json
