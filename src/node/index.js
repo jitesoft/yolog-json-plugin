@@ -2,7 +2,7 @@ import fs from 'fs';
 import sprintf from '@jitesoft/sprintf';
 import JsonBase from '../index';
 
-export default class Json extends JsonBase {
+export default class JsonPlugin extends JsonBase {
   #colors = {
     error: 'stderr',
     critical: 'stderr',

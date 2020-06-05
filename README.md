@@ -24,16 +24,16 @@ Import and use just as with any other yolog plugin!
 
 ```js
 import logger from '@jitesoft/yolog';
-import JSONPlugin from '@jitesoft/yolog-json-plugin';
-logger.addPlugin(new JSONPlugin('file.txt'));
+import JsonPlugin from '@jitesoft/yolog-json-plugin';
+logger.addPlugin(new JsonPlugin('file.txt'));
 ```
 
 To import it in a browser environment, the `src/browser` (or `/dist/browser` for precompiled) suffix have to be added:
 
 ```js
 import logger from '@jitesoft/yolog';
-import JSONPlugin from '@jitesoft/yolog-json-plugin/src/browser';
-logger.addPlugin(new JSONPlugin()); // No file!
+import JsonPlugin from '@jitesoft/yolog-json-plugin/src/browser';
+logger.addPlugin(new JsonPlugin()); // No file!
 ```
 
 ## Data format
