@@ -1,8 +1,9 @@
 import fs from 'fs';
 import sprintf from '@jitesoft/sprintf';
-import JsonBase from '../index';
+import { YologPlugin } from '@jitesoft/yolog';
+import { dirname } from 'path';
 
-export default class JsonPlugin extends JsonBase {
+export default class JsonPlugin extends YologPlugin {
   #colors = {
     error: 'stderr',
     critical: 'stderr',
@@ -34,12 +35,23 @@ export default class JsonPlugin extends JsonBase {
    * @abstract
    */
   async log (tag, timestamp, message, error) {
-    const data = await super.log(tag, timestamp, message, error);
+    const result = {
+      tag: tag,
+      timestamp: timestamp,
+      message: message
+    };
+
+    if (error && !['warning', 'debug', 'info'].includes(tag)) {
+      result[error] = {
+        message: error.message,
+        stack: error.stack
+      };
+    }
     if (this.#file !== null) {
-      await this.#writeToFileAsPromise(this.#file, sprintf('%j', data));
+      await this.#writeToFileAsPromise(this.#file, sprintf('%j\n', result));
     } else {
       await new Promise((resolve, reject) => {
-        process[this.#colors[tag]].write(sprintf('%j', data), 'UTF-8', (err) => err ? reject(err) : resolve());
+        process[this.#colors[tag]].write(sprintf('%j\n', result), 'UTF-8', (err) => err ? reject(err) : resolve());
       });
     }
   }
@@ -51,9 +63,10 @@ export default class JsonPlugin extends JsonBase {
    * @return {Promise<void>}
    */
   #writeToFileAsPromise = async (file, text) => {
-    const path = `${file}`;
+    // depending on if it is relative path or not, we aught to append curr dir
+    const path = (file.indexOf('/') === 0 || file.indexOf('\\') === 0) ? `${file}` : `${dirname(process.argv[1])}/${file}`;
     return new Promise((resolve, reject) => {
-      fs.appendFile(path, text + '\n', (error) => {
+      fs.appendFile(path, text, (error) => {
         if (error) {
           return reject(error);
         }

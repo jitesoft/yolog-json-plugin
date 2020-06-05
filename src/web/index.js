@@ -1,6 +1,6 @@
-import JsonBase from '../index';
+import { YologPlugin } from '@jitesoft/yolog';
 
-export default class JsonPlugin extends JsonBase {
+export default class JsonPlugin extends YologPlugin {
   #colors = {
     error: { call: 'error' },
     critical: { call: 'error' },
@@ -22,7 +22,18 @@ export default class JsonPlugin extends JsonBase {
    * @abstract
    */
   async log (tag, timestamp, message, error) {
-    const data = await super.log(tag, timestamp, message);
-    console[this.#colors[tag].call](data);
+    const result = {
+      tag: tag,
+      timestamp: timestamp,
+      message: message
+    };
+
+    if (error && !['warning', 'debug', 'info'].includes(tag)) {
+      result[error] = {
+        message: error.message,
+        stack: error.stack
+      };
+    }
+    console[this.#colors[tag].call](result);
   }
 }
