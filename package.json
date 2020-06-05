@@ -19,6 +19,7 @@
         "plugin",
         "jitesoft",
         "async",
+        "browser",
         "node-yolog",
         "node",
         "json"
