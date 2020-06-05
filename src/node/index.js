@@ -42,7 +42,7 @@ export default class JsonPlugin extends YologPlugin {
     };
 
     if (error && !['warning', 'debug', 'info'].includes(tag)) {
-      result[error] = {
+      result.error = {
         message: error.message,
         stack: error.stack
       };

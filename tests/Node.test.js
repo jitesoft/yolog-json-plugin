@@ -29,17 +29,17 @@ describe('Test node plugin.', () => {
 
     test('Test that Debug is printed to standard output.', async () => {
       await plugin.log('debug', 123, 'message');
-      expect(stdout).toHaveBeenCalledWith(sprintf('%j', { tag: 'debug', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
+      expect(stdout).toHaveBeenCalledWith(sprintf('%j\n', { tag: 'debug', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
     });
 
     test('Test that Info is printed to standard output.', async () => {
       await plugin.log('info', 123, 'message');
-      expect(stdout).toHaveBeenCalledWith(sprintf('%j', { tag: 'info', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
+      expect(stdout).toHaveBeenCalledWith(sprintf('%j\n', { tag: 'info', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
     });
 
     test('Test that Warning is printed standard output.', async () => {
       await plugin.log('warning', 123, 'message');
-      expect(stdout).toHaveBeenCalledWith(sprintf('%j', { tag: 'warning', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
+      expect(stdout).toHaveBeenCalledWith(sprintf('%j\n', { tag: 'warning', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
     });
 
     test('Test that error types are printed to error output.', async () => {
@@ -50,10 +50,10 @@ describe('Test node plugin.', () => {
       await plugin.log('emergency', 123456, 'message4', err);
 
       expect(stderr).toHaveBeenCalledTimes(4);
-      expect(stderr).toHaveBeenNthCalledWith(1, sprintf('%j', { tag: 'error', timestamp: 123, message: 'message1' }), 'UTF-8', expect.any(Function));
-      expect(stderr).toHaveBeenNthCalledWith(2, sprintf('%j', { tag: 'critical', timestamp: 1234, message: 'message2' }), 'UTF-8', expect.any(Function));
-      expect(stderr).toHaveBeenNthCalledWith(3, sprintf('%j', { tag: 'alert', timestamp: 12345, message: 'message3' }), 'UTF-8', expect.any(Function));
-      expect(stderr).toHaveBeenNthCalledWith(4, sprintf('%j', { tag: 'emergency', timestamp: 123456, message: 'message4', error: { message: err.message, stack: err.stack } }), 'UTF-8', expect.any(Function));
+      expect(stderr).toHaveBeenNthCalledWith(1, sprintf('%j\n', { tag: 'error', timestamp: 123, message: 'message1' }), 'UTF-8', expect.any(Function));
+      expect(stderr).toHaveBeenNthCalledWith(2, sprintf('%j\n', { tag: 'critical', timestamp: 1234, message: 'message2' }), 'UTF-8', expect.any(Function));
+      expect(stderr).toHaveBeenNthCalledWith(3, sprintf('%j\n', { tag: 'alert', timestamp: 12345, message: 'message3' }), 'UTF-8', expect.any(Function));
+      expect(stderr).toHaveBeenNthCalledWith(4, sprintf('%j\n', { tag: 'emergency', timestamp: 123456, message: 'message4', error: { message: err.message, stack: err.stack } }), 'UTF-8', expect.any(Function));
     });
   });
 
@@ -88,7 +88,7 @@ describe('Test node plugin.', () => {
       expect(fs.appendFile).toHaveBeenCalledTimes(7);
       for (let i = 0; i < tags.length; i++) {
         const tag = tags[i];
-        expect(fs.appendFile).toHaveBeenNthCalledWith(i + 1, 'file/path/test.txt', sprintf('%j\n', { tag: tag, timestamp: i + 10, message: `This is a ${tag} message!` }), expect.any(Function));
+        expect(fs.appendFile).toHaveBeenNthCalledWith(i + 1, expect.stringContaining('file/path/test.txt'), sprintf('%j\n', { tag: tag, timestamp: i + 10, message: `This is a ${tag} message!` }), expect.any(Function));
       }
     });
   });
