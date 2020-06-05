@@ -88,7 +88,7 @@ describe('Test node plugin.', () => {
       expect(fs.appendFile).toHaveBeenCalledTimes(7);
       for (let i = 0; i < tags.length; i++) {
         const tag = tags[i];
-        expect(fs.appendFile).toHaveBeenNthCalledWith(i + 1, 'file/path/test.txt', sprintf('%j', { tag: tag, timestamp: i + 10, message: `This is a ${tag} message!` }), expect.any(Function));
+        expect(fs.appendFile).toHaveBeenNthCalledWith(i + 1, 'file/path/test.txt', sprintf('%j\n', { tag: tag, timestamp: i + 10, message: `This is a ${tag} message!` }), expect.any(Function));
       }
     });
   });

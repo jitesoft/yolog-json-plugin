@@ -53,7 +53,7 @@ export default class Json extends JsonBase {
   #writeToFileAsPromise = async (file, text) => {
     const path = `${file}`;
     return new Promise((resolve, reject) => {
-      fs.appendFile(path, text, (error) => {
+      fs.appendFile(path, text + '\n', (error) => {
         if (error) {
           return reject(error);
         }
