@@ -5,5 +5,4 @@ tests
 node_modules
 webpack.config.js
 .eslintrc.json
-.babelrc
 .github

@@ -1,6 +1,4 @@
 {
-  "root": true,
   "parser": "babel-eslint",
-  "extends": ["@jitesoft/eslint-config/jest", "@jitesoft/eslint-config"]
-
+  "extends": "@jitesoft/eslint-config/jest"
 }

@@ -1,6 +1,6 @@
-import JsonBase from '../index';
 import fs from 'fs';
 import sprintf from '@jitesoft/sprintf';
+import JsonBase from '../index';
 
 export default class Json extends JsonBase {
   #colors = {
@@ -26,13 +26,15 @@ export default class Json extends JsonBase {
   /**
    * Method called when a log message is intercepted and the plugin is listening to the given tag.
    *
-   * @param {String} tag Tag which was used when logging the message.
+   * @param {String} tag       Tag which was used when logging the message.
    * @param {Number} timestamp Timestamp (in ms) when the log was intercepted by the Yolog instance.
-   * @param {String} message
-   * @return {Promise<void>}
+   * @param {String} message   Message that is passed to the plugin.
+   * @param {Error} error      Error generated in the logger to be possible to use for call stack or for other reasons.
+   * @return Promise<void>
+   * @abstract
    */
-  async log (tag, timestamp, message) {
-    const data = await super.log(tag, timestamp, message);
+  async log (tag, timestamp, message, error) {
+    const data = await super.log(tag, timestamp, message, error);
     if (this.#file !== null) {
       await this.#writeToFileAsPromise(this.#file, sprintf('%j', data));
     } else {

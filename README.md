@@ -25,5 +25,27 @@ Import and use just as with any other yolog plugin!
 ```js
 import logger from '@jitesoft/yolog';
 import JSONPlugin from '@jitesoft/yolog-json-plugin';
-logger.addPlugin(new JSONPlugin('https://webhook/uri'));
+logger.addPlugin(new JSONPlugin('file.txt'));
 ```
+
+To import it in a browser environment, the `src/browser` (or `/dist/browser` for precompiled) suffix have to be added:
+
+```js
+import logger from '@jitesoft/yolog';
+import JSONPlugin from '@jitesoft/yolog-json-plugin/src/browser';
+logger.addPlugin(new JSONPlugin()); // No file!
+```
+
+## Data format
+
+Each line in the output is a single JS Object notation, that is, the full file is not an array of json objects, but each
+line should be parsed as its own.  
+
+Example: 
+
+```json
+{"tag": "emergency", "timestamp": 123123123, "message": "abc123!!", "error":  { "message": "error message!", "stack": [ "callstack here." ] }}
+{"tag": "warning", "timestamp": 123123124, "message": "abc123"}
+```
+
+That means that when parsing the file (or output), each line should be parsed as its own object.

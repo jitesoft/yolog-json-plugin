@@ -43,21 +43,21 @@ describe('Test node plugin.', () => {
     });
 
     test('Test that error types are printed to error output.', async () => {
+      const err = new Error('test test');
       await plugin.log('error', 123, 'message1');
       await plugin.log('critical', 1234, 'message2');
       await plugin.log('alert', 12345, 'message3');
-      await plugin.log('emergency', 123456, 'message4');
+      await plugin.log('emergency', 123456, 'message4', err);
 
       expect(stderr).toHaveBeenCalledTimes(4);
       expect(stderr).toHaveBeenNthCalledWith(1, sprintf('%j', { tag: 'error', timestamp: 123, message: 'message1' }), 'UTF-8', expect.any(Function));
       expect(stderr).toHaveBeenNthCalledWith(2, sprintf('%j', { tag: 'critical', timestamp: 1234, message: 'message2' }), 'UTF-8', expect.any(Function));
       expect(stderr).toHaveBeenNthCalledWith(3, sprintf('%j', { tag: 'alert', timestamp: 12345, message: 'message3' }), 'UTF-8', expect.any(Function));
-      expect(stderr).toHaveBeenNthCalledWith(4, sprintf('%j', { tag: 'emergency', timestamp: 123456, message: 'message4' }), 'UTF-8', expect.any(Function));
+      expect(stderr).toHaveBeenNthCalledWith(4, sprintf('%j', { tag: 'emergency', timestamp: 123456, message: 'message4', error: { message: err.message, stack: err.stack } }), 'UTF-8', expect.any(Function));
     });
   });
 
   describe('Test file output.', () => {
-
     afterEach(() => {
       jest.resetModules();
       jest.resetAllMocks();
