@@ -56,8 +56,8 @@
         "webpack-cli": "^4.0.0-beta.8"
     },
     "scripts": {
-        "test": "eslint src/ tests/ && jest tests/ && npm audit",
-        "build:prod": "cross-env NODE_ENV=production webpack -p",
+        "test": "jest tests/",
+        "build:prod": "cross-env NODE_ENV=production webpack",
         "build:dev": "cross-env NODE_ENV=development webpack"
     },
     "dependencies": {
