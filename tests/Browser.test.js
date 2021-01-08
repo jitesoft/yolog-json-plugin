@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import JsonPlugin from '../src/web/index';
 const plugin = new JsonPlugin();
 
