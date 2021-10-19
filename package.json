@@ -41,19 +41,19 @@
         "@jitesoft/yolog": ">=3.1"
     },
     "devDependencies": {
-        "@babel/core": "^7.12.10",
-        "@babel/eslint-parser": "^7.12.1",
-        "@jitesoft/babel-preset-main": "^2.7.3",
-        "@jitesoft/yolog": "^3.1.4",
+        "@babel/core": "^7.15.8",
+        "@babel/eslint-parser": "^7.15.8",
+        "@jitesoft/babel-preset-main": "^2.13.1",
+        "@jitesoft/yolog": "^3.1.6",
         "babel-eslint": "^10.1.0",
-        "babel-jest": "^27.0.0-next.2",
+        "babel-jest": "^27.3.1",
         "babel-loader": "^8.2.2",
-        "core-js": "^3.8.2",
+        "core-js": "^3.18.3",
         "cross-env": "^7.0.3",
-        "eslint": "^7.17.0",
-        "jest": "^27.0.0-next.2",
-        "webpack": "^5.11.1",
-        "webpack-cli": "^4.3.1"
+        "eslint": "^7.32.0",
+        "jest": "^27.3.1",
+        "webpack": "^5.58.2",
+        "webpack-cli": "^4.9.1"
     },
     "scripts": {
         "test": "jest tests/",
@@ -61,6 +61,6 @@
         "build:dev": "cross-env NODE_ENV=development webpack"
     },
     "dependencies": {
-        "@jitesoft/sprintf": "^1.1.2"
+        "@jitesoft/sprintf": "^1.1.7"
     }
 }
