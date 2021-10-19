@@ -23,7 +23,7 @@ const node = Object.assign({}, {
   },
   externals: {
     '@jitesoft/sprintf': '@jitesoft/sprintf',
-    '@jitesoft/yolog':'@jitesoft/yolog/node.js'
+    '@jitesoft/yolog':'@jitesoft/yolog/index.js'
   },
   target: 'node',
   output: {
@@ -42,7 +42,7 @@ const web = Object.assign({}, common, {
   },
   externals: {
     '@jitesoft/sprintf': '@jitesoft/sprintf',
-    '@jitesoft/yolog':'@jitesoft/yolog/browser.js'
+    '@jitesoft/yolog':'@jitesoft/yolog/index.js'
   },
   target: 'web',
   output: {
