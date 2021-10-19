@@ -3,10 +3,6 @@ const Path = require('path');
 
 const common = {
   mode: process.env.NODE_ENV,
-  externals: {
-    '@jitesoft/sprintf': '@jitesoft/sprintf',
-    '@jitesoft/yolog':'@jitesoft/yolog'
-  },
   module: {
     rules: [
       {
@@ -25,6 +21,10 @@ const node = Object.assign({}, {
       Path.join(__dirname, 'src', 'node', 'index.js')
     ]
   },
+  externals: {
+    '@jitesoft/sprintf': '@jitesoft/sprintf',
+    '@jitesoft/yolog':'@jitesoft/yolog/node.js'
+  },
   target: 'node',
   output: {
     filename: 'node.js',
@@ -39,6 +39,10 @@ const web = Object.assign({}, common, {
     'browser': [
       Path.join(__dirname, 'src', 'web', 'index.js')
     ]
+  },
+  externals: {
+    '@jitesoft/sprintf': '@jitesoft/sprintf',
+    '@jitesoft/yolog':'@jitesoft/yolog/browser.js'
   },
   target: 'web',
   output: {
