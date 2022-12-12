@@ -59,7 +59,7 @@
         "jest": "^29.3.1",
         "jest-environment-jsdom": "^29.3.1",
         "webpack": "^5.75.0",
-        "webpack-cli": "^5.0.0"
+        "webpack-cli": "^5.0.1"
     },
     "scripts": {
         "test": "jest tests/",
