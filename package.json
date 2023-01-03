@@ -67,6 +67,6 @@
         "build:dev": "cross-env NODE_ENV=development webpack"
     },
     "dependencies": {
-        "@jitesoft/sprintf": "^2.0.2"
+        "@jitesoft/sprintf": "^2.0.3"
     }
 }
