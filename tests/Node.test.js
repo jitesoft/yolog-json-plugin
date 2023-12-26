@@ -27,22 +27,22 @@ describe('Test node plugin.', () => {
       stderr.mockRestore();
     });
 
-    test('Test that Debug is printed to standard output.', async () => {
+    test('that Debug is printed to standard output.', async () => {
       await plugin.log('debug', 123, 'message');
       expect(stdout).toHaveBeenCalledWith(sprintf('%j\n', { tag: 'debug', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
     });
 
-    test('Test that Info is printed to standard output.', async () => {
+    test('that Info is printed to standard output.', async () => {
       await plugin.log('info', 123, 'message');
       expect(stdout).toHaveBeenCalledWith(sprintf('%j\n', { tag: 'info', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
     });
 
-    test('Test that Warning is printed standard output.', async () => {
+    test('that Warning is printed standard output.', async () => {
       await plugin.log('warning', 123, 'message');
       expect(stdout).toHaveBeenCalledWith(sprintf('%j\n', { tag: 'warning', timestamp: 123, message: 'message' }), 'UTF-8', expect.any(Function));
     });
 
-    test('Test that error types are printed to error output.', async () => {
+    test('that error types are printed to error output.', async () => {
       const err = new Error('test test');
       await plugin.log('error', 123, 'message1');
       await plugin.log('critical', 1234, 'message2');
@@ -63,7 +63,7 @@ describe('Test node plugin.', () => {
       jest.resetAllMocks();
     });
 
-    test('Test file output.', async () => {
+    test('file output.', async () => {
       fs.appendFile = jest.fn((path, text, callback) => {
         callback();
       });
@@ -88,7 +88,7 @@ describe('Test node plugin.', () => {
       expect(fs.appendFile).toHaveBeenCalledTimes(7);
       for (let i = 0; i < tags.length; i++) {
         const tag = tags[i];
-        expect(fs.appendFile).toHaveBeenNthCalledWith(i + 1, expect.stringContaining('file/path/test.txt'), sprintf('%j\n', { tag: tag, timestamp: i + 10, message: `This is a ${tag} message!` }), expect.any(Function));
+        expect(fs.appendFile).toHaveBeenNthCalledWith(i + 1, expect.stringContaining('file/path/test.txt'), sprintf('%j\n', { tag, timestamp: i + 10, message: `This is a ${tag} message!` }), expect.any(Function));
       }
     });
   });

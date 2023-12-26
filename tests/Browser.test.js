@@ -5,25 +5,25 @@ import JsonPlugin from '../src/web/index';
 const plugin = new JsonPlugin();
 
 describe('Test web plugin.', () => {
-  test('Test that Debug is printed to standard console.', async () => {
+  test('that Debug is printed to standard console.', async () => {
     window.console.log = jest.fn();
     await plugin.log('debug', 123, 'message');
     expect(window.console.log).toHaveBeenCalledWith({ tag: 'debug', timestamp: 123, message: 'message' });
   });
 
-  test('Test that Info is printed to the info console.', async () => {
+  test('that Info is printed to the info console.', async () => {
     window.console.info = jest.fn();
     await plugin.log('info', 123, 'message');
     expect(window.console.info).toHaveBeenCalledWith({ tag: 'info', timestamp: 123, message: 'message' });
   });
 
-  test('Test that Warning is printed to the warn console.', async () => {
+  test('that Warning is printed to the warn console.', async () => {
     window.console.warn = jest.fn();
     await plugin.log('warning', 123, 'message');
     expect(window.console.warn).toHaveBeenCalledWith({ tag: 'warning', timestamp: 123, message: 'message' });
   });
 
-  test('Test that error types are printed to the error console.', async () => {
+  test('that error types are printed to the error console.', async () => {
     window.console.error = jest.fn();
     await plugin.log('error', 123, 'message1');
     await plugin.log('critical', 1234, 'message2');
